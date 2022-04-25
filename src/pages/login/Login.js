@@ -1,7 +1,28 @@
 import "./login.scss";
-import { useState, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const login = async (e) => {
+    e.preventDefault();
+    try {
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      console.log(user);
+      user && navigate("/home");
+    } catch (error) {
+      console.log(error.message);
+      setMessage("Wrong user or password");
+    }
+    return;
+  };
+
   return (
     <div className="login">
       <div className="top">
@@ -16,13 +37,38 @@ const Login = () => {
       <div className="container">
         <form>
           <h1>Sign In</h1>
-          <input type="email" placeholder="Email or phone number" />
-          <input type="password" placeholder="Password" />
-          <button className="loginButton">Sign In</button>
-          <span>New To Netflix? Sign Up Now</span>
+          <input
+            required
+            type="email"
+            placeholder="Email or phone number"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            required
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button className="loginButton" onClick={login}>
+            Sign in
+          </button>
+          {message && (
+            <small style={{ color: "white", textAlign: "center" }}>
+              {message}
+            </small>
+          )}
           <small>
-            This page is protected by Google reCAPTCHA to ensure you are not a
-            bot <b>Learn More</b>
+            New To Netflix?{" "}
+            <Link
+              to="/register"
+              style={{
+                textDecoration: "none",
+                color: "white",
+                fontWeight: "bold",
+              }}
+            >
+              Register now
+            </Link>
           </small>
         </form>
       </div>

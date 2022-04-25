@@ -1,0 +1,123 @@
+.featured {
+  height: 90vh;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .general {
+    background-color: rgb(240, 116, 136);
+    position: absolute;
+    height: 70%;
+    width: 90%;
+    margin: 0;
+
+    bottom: 100px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    opacity: 0.8;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    .post {
+      padding: 1rem;
+      margin: 20px 0px;
+      width: 300px;
+      flex: 1;
+      overflow: scroll;
+      white-space: nowrap;
+      .entry {
+        margin-bottom: 2rem;
+        border: 1px solid white;
+        padding: 1rem;
+
+        border-radius: 5px;
+
+        .allIcons {
+          justify-content: space-between;
+          display: flex;
+          .likes {
+            display: flex;
+            .like {
+              padding-top: 5px;
+              cursor: pointer;
+
+              font-size: 30px;
+            }
+            .number {
+              padding: 10px;
+            }
+          }
+
+          .icons {
+            text-align: right;
+          }
+          .icon {
+            border: 2px solid white;
+            padding: 5px;
+            margin: 10px 10px 0px 0px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 16px;
+          }
+        }
+
+        p {
+          margin-top: 10px;
+          font-size: 15px;
+          white-space: break-spaces;
+          word-break: break-word;
+        }
+      }
+    }
+    .create {
+      padding: 1rem;
+      width: 600px;
+      flex: 1;
+      background-color: #ffd6ba;
+
+      .form {
+        padding-top: 2rem;
+
+        display: flex;
+        flex-direction: column;
+      }
+      input,
+      textarea {
+        width: 40%;
+        margin-bottom: 1rem;
+        border: 1px solid white;
+        padding: 1rem;
+        border-radius: 5px;
+        padding: 15px;
+        background: white;
+        color: #434753;
+        outline-color: #ffd6ba;
+      }
+
+      //have you ever used this selector before
+
+      textarea {
+        width: 80%;
+        height: 100px;
+
+        color: #898a8d;
+      }
+
+      .send {
+        margin-top: 1rem;
+        width: 100px;
+        border-radius: 5px;
+        height: 40px;
+        border: none;
+        background: #434753;
+        color: #ffffff;
+        cursor: pointer;
+      }
+    }
+  }
+}

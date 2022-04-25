@@ -1,38 +1,83 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { ArrowDropDown, Notifications, Search } from "@material-ui/icons";
 import "./nav.scss";
+import { auth } from "../../firebase";
+import { onAuthStateChanged, signOut } from "@firebase/auth";
 
 const Nav = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
+  const [changing, setChanging] = useState(0);
+  onAuthStateChanged(auth, (current) => {
+    setCurrentUser(current);
+  });
+
+  const logout = async () => {
+    await signOut(auth);
+    return;
+  };
   window.onscroll = () => {
+    const final = (window.pageYOffset / (window.innerHeight + 100)).toFixed(1);
+    setChanging(final);
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
   };
+  useEffect(() => {
+    return () => {};
+  }, []);
+
   return (
-    <div className={isScrolled ? "navbar scrolled" : "navbar"}>
+    <div
+      className={isScrolled ? "navbar scrolled" : "navbar"}
+      style={{ backgroundColor: `rgb(0,0,0, ${changing})` }}
+    >
       <div className="container">
         <div className="left">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
-            alt=""
-          />
+          <Link
+            to="/home"
+            style={{
+              textDecoration: "none",
+              color: "white",
+              fontWeight: "bold",
+            }}
+          >
+            <h1 className="img">FILMBIURÓ</h1>
+          </Link>
 
-          <span>Homepage</span>
           <span>Series</span>
           <span>Movies</span>
-          <span>New And Popular</span>
-          <span>My List</span>
+          <span>Documentaries</span>
+          <span>
+            {" "}
+            <Link
+              to="/home/mylist"
+              style={{
+                textDecoration: "none",
+                color: "white",
+                fontWeight: "bold",
+              }}
+            >
+              My Blog
+            </Link>
+          </span>
         </div>
         <div className="right">
-          <Search className="icon" />
-          <span>KID</span>
-          <Notifications className="icon" />
-          <img src="/Me.png" alt="" />
+          <span>
+            {currentUser
+              ? `User logged in : ${currentUser?.email}`
+              : "User logged out"}
+          </span>
+
           <div className="profile">
             <ArrowDropDown className="icon" />
             <div className="options">
               <span>Settings</span>
-              <span>Log Out</span>
+              <span onClick={logout}>
+                <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+                  Log out
+                </Link>
+              </span>
             </div>
           </div>
         </div>

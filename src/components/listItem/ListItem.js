@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
 import {
   Add,
   PlayArrow,
@@ -7,10 +9,15 @@ import {
 } from "@material-ui/icons";
 import "./listItem.scss";
 
-const ListItem = ({ index }) => {
+const ListItem = ({ index, vid, setCurVid }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const trailer =
-    "https://www.youtube.com/embed/c_dNIXwrbzY?autoplay=1&mute=1&controls=0&modestbranding=1";
+
+  const result = vid.link.match(/[^\/]*$/);
+
+  const handleClick = () => {
+    setCurVid(vid.link);
+  };
+
   return (
     <div
       className="listItem"
@@ -19,38 +26,40 @@ const ListItem = ({ index }) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       {!isHovered && (
-        <img
-          src="https://orgoglionerd.it/wp-content/uploads/2019/12/kill-bill.jpg"
-          alt=""
-        />
+        <img src={`https://i.ytimg.com/vi/${result[0]}/hqdefault.jpg`} alt="" />
       )}
       {isHovered && (
         <>
           <iframe
-            src={trailer}
+            src={vid.link}
             title="Embedded youtube"
             frameBorder="0"
             allowFullScreen
-            autoplay
+            autoPlay
           />
 
           <div className="itemInfo">
             <div className="icons">
-              <PlayArrow className="icon" />
+              <Link
+                to="/watch"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  fontWeight: "bold",
+                }}
+              >
+                <PlayArrow className="icon" onClick={handleClick} />
+              </Link>
+
               <Add className="icon" />
               <ThumbUpAltOutlined className="icon" />
               <ThumbDownOutlined className="icon" />
             </div>
             <div className="infoItemTop">
-              <span>1 hour 14 mins </span>
-              <span className="limit">+16</span>
-              <span>1999</span>
+              <span>{vid.artist} </span>
             </div>
-            <div className="desc">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil,
-              quam.
-            </div>
-            <div className="genre">Action</div>
+            <div className="desc">{vid.description}</div>
+            <div className="genre">{vid.genre}</div>
           </div>
         </>
       )}

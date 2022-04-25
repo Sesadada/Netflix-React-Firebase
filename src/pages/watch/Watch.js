@@ -1,23 +1,31 @@
 import { ArrowBackIosOutlined } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 import "./watch.scss";
+import ReactPlayer from "react-player";
 
-const Watch = () => {
-  const trailer =
-    "https://www.youtube.com/embed/c_dNIXwrbzY?autoplay=1&mute=1&controls=1&modestbranding=1";
-
+const Watch = ({ video }) => {
+  const final = video && typeof video === "string" ? video : video.link;
   return (
     <div className="watch">
       <div className="back">
-        <ArrowBackIosOutlined />
-        Home
+        <Link
+          to="/home"
+          style={{
+            textDecoration: "none",
+            fontWeight: "bold",
+          }}
+          className="back"
+        >
+          <ArrowBackIosOutlined />
+          Home
+        </Link>
       </div>
-      <iframe
+      <ReactPlayer
+        url={final}
         className="video"
-        src={trailer}
-        title="Embedded youtube"
-        frameBorder="0"
-        allowFullScreen
-        autoplay
+        width="100%"
+        height="100%"
+        playing={true}
       />
     </div>
   );
