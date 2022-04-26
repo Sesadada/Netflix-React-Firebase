@@ -47,7 +47,7 @@ function App() {
     });
   }, []);
   return (
-    <Router>
+    <Router basename="/Netflix-React-Firebase">
       <div className="App">
         <Routes>
           <Route path="/" element={<Login />} />
