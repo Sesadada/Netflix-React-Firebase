@@ -12,7 +12,7 @@ import { db } from "./firebase";
 import { collection, onSnapshot } from "firebase/firestore";
 import ProtectedRoutes from "./ProtectedRoutes";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   const [logged, setLogged] = useState(false);
@@ -47,7 +47,7 @@ function App() {
     });
   }, []);
   return (
-    <Router>
+    <HashRouter basename={process.env.PUBLIC_URL}>
       <div className="App">
         <Routes>
           <Route path="/" element={<Login />} />
@@ -82,7 +82,7 @@ function App() {
           </Route>
         </Routes>
       </div>
-    </Router>
+    </HashRouter>
   );
 }
 
