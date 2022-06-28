@@ -5,6 +5,7 @@ import Nav from "../../components/nav/Nav";
 import "./home.scss";
 import { db } from "../../firebase";
 import { collection, onSnapshot } from "firebase/firestore";
+import { useRef } from "react";
 
 export const Home = ({
   setCurVid,

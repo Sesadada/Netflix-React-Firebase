@@ -34,33 +34,36 @@ const Nav = () => {
     >
       <div className="container">
         <div className="left">
-          <Link
-            to="/home"
-            style={{
-              textDecoration: "none",
-              color: "white",
-              fontWeight: "bold",
-            }}
-          >
-            <h1 className="img">FILMBIURÓ</h1>
-          </Link>
-
-          <span>Series</span>
-          <span>Movies</span>
-          <span>Documentaries</span>
-          <span>
-            {" "}
+          <div className="img">
             <Link
-              to="/home/mylist"
+              to="/home"
               style={{
                 textDecoration: "none",
-                color: "white",
                 fontWeight: "bold",
+                color: "white",
               }}
             >
-              My Blog
+              <h1>FILMBIURÓ</h1>
+            </Link>{" "}
+          </div>
+          <div className="img">
+            <Link
+              style={{
+                textDecoration: "none",
+                fontWeight: "bold",
+                color: "white",
+              }}
+              to="/home/mylist"
+            >
+              <h4
+                style={{
+                  paddingTop: "8px",
+                }}
+              >
+                My Blog
+              </h4>
             </Link>
-          </span>
+          </div>
         </div>
         <div className="right">
           <span>
@@ -72,7 +75,6 @@ const Nav = () => {
           <div className="profile">
             <ArrowDropDown className="icon" />
             <div className="options">
-              <span>Settings</span>
               <span onClick={logout}>
                 <Link to="/" style={{ textDecoration: "none", color: "white" }}>
                   Log out

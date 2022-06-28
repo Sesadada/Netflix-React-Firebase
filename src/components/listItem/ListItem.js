@@ -9,7 +9,7 @@ import {
 } from "@material-ui/icons";
 import "./listItem.scss";
 
-const ListItem = ({ index, vid, setCurVid }) => {
+const ListItem = ({ index, vid, setCurVid, ref }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const result = vid.link.match(/[^\/]*$/);
@@ -20,6 +20,7 @@ const ListItem = ({ index, vid, setCurVid }) => {
 
   return (
     <div
+      ref={ref}
       className="listItem"
       style={{ left: isHovered && index * 225 - 50 + index * 2.5 }}
       onMouseEnter={() => setIsHovered(true)}

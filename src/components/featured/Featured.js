@@ -4,12 +4,22 @@ import { Link, useNavigate } from "react-router-dom";
 import "./feautured.scss";
 
 const Featured = ({ curVid }) => {
+  console.log(curVid.link);
   return (
     <div className="featured">
       <img
         src="https://images.pexels.com/photos/10051509/pexels-photo-10051509.jpeg?cs=srgb&dl=pexels-%D1%83%D0%BD%D0%B0%D0%B9%D0%B7%D0%B0%D1%82-%D1%8E%D1%88%D0%B0%D0%B5%D0%B2%D0%B0-10051509.jpg&fm=jpg"
         alt=""
       />
+      <div>
+        <iframe
+          src={curVid.link}
+          title="Embedded youtube"
+          frameBorder="0"
+          allowFullScreen
+          autoPlay
+        />
+      </div>
       <div className="info">
         <h1>{curVid && curVid.title}</h1>
         <span className="desc">{curVid && curVid.description}</span>
